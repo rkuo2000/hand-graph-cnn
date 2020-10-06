@@ -21,6 +21,7 @@ from hand_shape_pose.util import graph_util
 
 
 class Graph_CNN_Feat_Mesh(nn.Module):
+
     def __init__(self, num_input_chan, num_mesh_output_chan, graph_L):
         print('Graph ConvNet: feature to mesh')
 
@@ -82,7 +83,6 @@ class Graph_CNN_Feat_Mesh(nn.Module):
 
         return W
 
-    @staticmethod
     def graph_conv_cheby(self, x, cl, bn, L, Fout, K):
         # parameters
         # B = batch size
@@ -131,7 +131,8 @@ class Graph_CNN_Feat_Mesh(nn.Module):
             return x
         else:
             return x
-
+        
+    @staticmethod
     def forward(self, x):
         # x: B x num_input_chan
         x = self.fc(x)
@@ -162,6 +163,7 @@ class Graph_CNN_Feat_Mesh(nn.Module):
 
 
 class Net_HM_Feat(nn.Module):
+
     def __init__(self, num_heatmap_chan, num_feat_chan, size_input_feature=(64, 64)):
         super(Net_HM_Feat, self).__init__()
 
@@ -190,7 +192,8 @@ class Net_HM_Feat(nn.Module):
         # fc layers
         self.num_feat_out = self.num_feat_chan * (
                     size_input_feature[0] * size_input_feature[1] // (self.downsample_scale ** 2))
-
+        
+    @staticmethod
     def forward(self, hm_list, encoding_list):
         x = self.heatmap_conv(hm_list[-1]) + self.encoding_conv(encoding_list[-1])
         if len(encoding_list) > 1:
@@ -216,7 +219,8 @@ class Net_HM_Feat_Mesh(nn.Module):
         self.feat_net = Net_HM_Feat(num_heatmap_chan, num_feat_chan, size_input_feature)
 
         self.mesh_net = Graph_CNN_Feat_Mesh(self.feat_net.num_feat_out, num_mesh_output_chan, graph_L)
-
+        
+    @staticmethod
     def forward(self, hm_list, encoding_list):
         feat = self.feat_net(hm_list, encoding_list)  # B x 4096
         mesh = self.mesh_net(feat)  # B x 1280 x 3
