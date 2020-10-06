@@ -75,7 +75,7 @@ def main():
             images.to(device), cam_params.to(device), bboxes.to(device), pose_roots.to(device), pose_scales.to(device)
         with torch.no_grad():
             est_mesh_cam_xyz, est_pose_uv, est_pose_cam_xyz = \
-                model(images, cam_params, bboxes, pose_roots, pose_scales, pose_scales)
+                model(images, cam_params, bboxes, pose_roots, pose_scales)
 
             est_mesh_cam_xyz = [o.to(cpu_device) for o in est_mesh_cam_xyz]
             est_pose_uv = [o.to(cpu_device) for o in est_pose_uv]
