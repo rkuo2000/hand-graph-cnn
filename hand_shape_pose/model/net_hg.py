@@ -42,7 +42,8 @@ class Hourglass(nn.Module):
         self.low3_ = nn.ModuleList(_low3_)
 
         self.up2 = nn.Upsample(scale_factor=2)
-
+        
+    @staticmethod
     def forward(self, x):
         up1 = x
         for j in range(self.nModules):
@@ -105,6 +106,7 @@ class Net_HM_HG(nn.Module):
         self.ll_ = nn.ModuleList(_ll_)
         self.tmpOut_ = nn.ModuleList(_tmpOut_)
 
+    @staticmethod
     def forward(self, x):
         x = self.conv1_(x)
         x = self.bn1(x)
