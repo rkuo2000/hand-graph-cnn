@@ -131,7 +131,8 @@ class Graph_CNN_Feat_Mesh(nn.Module):
             return x
         else:
             return x
-        
+ 
+    @staticmethod    
     def forward(self, x):
         # x: B x num_input_chan
         x = self.fc(x)
@@ -192,6 +193,7 @@ class Net_HM_Feat(nn.Module):
         self.num_feat_out = self.num_feat_chan * (
                     size_input_feature[0] * size_input_feature[1] // (self.downsample_scale ** 2))
         
+    @staticmethod   
     def forward(self, hm_list, encoding_list):
         x = self.heatmap_conv(hm_list[-1]) + self.encoding_conv(encoding_list[-1])
         if len(encoding_list) > 1:
@@ -218,6 +220,7 @@ class Net_HM_Feat_Mesh(nn.Module):
 
         self.mesh_net = Graph_CNN_Feat_Mesh(self.feat_net.num_feat_out, num_mesh_output_chan, graph_L)
         
+    @staticmethod    
     def forward(self, hm_list, encoding_list):
         feat = self.feat_net(hm_list, encoding_list)  # B x 4096
         mesh = self.mesh_net(feat)  # B x 1280 x 3
