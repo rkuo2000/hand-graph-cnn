@@ -83,6 +83,7 @@ class Graph_CNN_Feat_Mesh(nn.Module):
 
         return W
 
+    @staticmethod
     def graph_conv_cheby(self, x, cl, bn, L, Fout, K):
         # parameters
         # B = batch size
