@@ -218,7 +218,6 @@ class Net_HM_Feat_Mesh(nn.Module):
 
         self.mesh_net = Graph_CNN_Feat_Mesh(self.feat_net.num_feat_out, num_mesh_output_chan, graph_L)
         
-    @staticmethod
     def forward(self, hm_list, encoding_list):
         feat = self.feat_net(hm_list, encoding_list)  # B x 4096
         mesh = self.mesh_net(feat)  # B x 1280 x 3
