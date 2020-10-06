@@ -119,6 +119,7 @@ class Graph_CNN_Mesh_Pose(nn.Module):
         else:
             return x
 
+    @staticmethod
     def forward(self, x):
         # x: B x V x Fin
         cl_i = 0
