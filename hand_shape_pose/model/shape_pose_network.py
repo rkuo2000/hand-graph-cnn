@@ -68,7 +68,8 @@ class ShapePoseNetwork(nn.Module):
         self.net_feat_mesh.mesh_net.graph_L = self.graph_L
         self.net_mesh_pose.graph_L = self.graph_L
         self.graph_mask = self.graph_mask.to(*args, **kwargs)
-
+        
+    @staticmethod
     def forward(self, images, cam_param, bbox, pose_root, pose_scale):
         """
         :param images: B x H x W x C
